@@ -3,6 +3,7 @@ import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useLocationSpy} from "../hooks/useLocationSpy.ts";
 import {useScrollSpy} from "../hooks/useScrollSpy.ts";
+import {useInputSpy} from "../hooks/useInputSpy.ts";
 
 interface Props {
     sendMessage: SendMessageFunction;
@@ -16,6 +17,7 @@ interface Props {
 const Driver: React.FC<Props> = ({sendMessage}) => {
     useLocationSpy(sendMessage);
     useScrollSpy(sendMessage);
+    useInputSpy(sendMessage);
 };
 
 export default Driver;

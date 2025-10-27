@@ -14,7 +14,8 @@
     "android:open-ports": "adb reverse tcp:5173 tcp:5173 && adb reverse tcp:3001 tcp:3001",
     "android:close-ports": "adb reverse --remove tcp:5173 && adb reverse --remove tcp:3001",
     "android:no-dimming": "adb shell settings put global stay_on_while_plugged_in 7 && adb shell settings put system screen_off_timeout 2147483647 && adb shell settings put system screen_brightness_mode 0 && adb shell settings put system screen_brightness 255",
-    "android:allow-sleep": "adb shell settings put global stay_on_while_plugged_in 0 && adb shell settings put system screen_off_timeout 15000 && adb shell settings put system screen_brightness_mode 1",    "lint": "eslint .",
+    "android:allow-sleep": "adb shell settings put global stay_on_while_plugged_in 0 && adb shell settings put system screen_off_timeout 60000 && adb shell settings put system screen_brightness_mode 1",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {

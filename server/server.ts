@@ -61,6 +61,14 @@ class WebSocketServerApp {
                     this.broadcast(message, driver);
                     console.log('Процент прокрутки отправлен');
                     break;
+                case MessageType.CLICK:
+                    this.broadcast(message, driver);
+                    console.log('ID кликнутого элемента отправлен');
+                    break;
+                case MessageType.INPUT:
+                    this.broadcast(message, driver);
+                    console.log('Введённый текст отправлен');
+                    break;
                 default:
                     console.log('Неизвестный тип сообщения:', message.type);
             }
