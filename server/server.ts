@@ -57,6 +57,10 @@ class WebSocketServerApp {
                     this.broadcast(message, driver);
                     console.log('Локация отправлена');
                     break;
+                case MessageType.SCROLL:
+                    this.broadcast(message, driver);
+                    console.log('Процент прокрутки отправлен');
+                    break;
                 default:
                     console.log('Неизвестный тип сообщения:', message.type);
             }

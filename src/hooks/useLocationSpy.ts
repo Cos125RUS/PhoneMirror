@@ -1,20 +1,15 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import {MessageType} from "../types/websocket.ts";
+import {useIsMounted} from "./useIsMounted.ts";
 
+/**
+ * Шпион за перемещениями
+ * @param sendMessage функция отправки сообщений о событии
+ */
 export const useLocationSpy = (sendMessage: SendMessageFunction) => {
-    const [isMounted, setIsMounted] = useState(false);
+    const isMounted = useIsMounted();
     const location = useLocation();
-
-    useEffect(() => {
-        const timeout = setTimeout(() => {
-            setIsMounted(true);
-        });
-
-        return () => {
-            clearTimeout(timeout);
-        };
-    }, []);
 
     useEffect(() => {
         if (isMounted) {

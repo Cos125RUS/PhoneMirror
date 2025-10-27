@@ -20,6 +20,10 @@ const Driven: React.FC<Props> = ({ws}) => {
                     case MessageType.LOCATION:
                         navigate(message.payload.text);
                         break;
+                    case MessageType.SCROLL:
+                        const scrollTop = +message.payload.text * (document.documentElement.scrollHeight - window.innerHeight);
+                        window.scroll({top: scrollTop, behavior: "smooth"});
+                        break;
                     default:
                         console.error('Неизвестная команда: ', message.type);
                 }

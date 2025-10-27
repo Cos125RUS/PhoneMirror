@@ -1,6 +1,7 @@
 export enum MessageType {
     INIT = 'init',
     LOCATION = 'location',
+    SCROLL = 'scroll',
 }
 
 export interface WebSocketMessage {
