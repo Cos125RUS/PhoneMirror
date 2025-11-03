@@ -9,41 +9,47 @@ const EXCLUDES_KEYS = ['Enter', 'Shift', 'Control', 'Alt'];
  * @param sendMessage функция отправки сообщений о событии
  */
 export const useInputSpy = (sendMessage: SendMessageFunction) => {
-    const element = useRef<HTMLElement | null>();
+    const element = useRef<HTMLInputElement | HTMLTextAreaElement | null>(null);
     const [isHandlingKeyDown, setIsHandlingKeyDown] = useState(false);
 
     //Перехват кликов
     useEffect(() => {
         /** Перехватчик ввода текста */
         const handleInput = (e: MouseEvent) => {
-            if (element.current && element.current !== e.target) {
+            if (!e.target) return;
+
+            const targetElement = e.target as HTMLElement;
+
+            if (element.current && element.current !== targetElement) {
                 sendMessage(MessageType.BLUR, element.current.id);
                 element.current = null;
                 setIsHandlingKeyDown(() => false);
             }
 
             //Клик по input
-            if (e.target.localName === 'input') {
-                element.current = e.target;
-                sendMessage(MessageType.CLICK, e.target.id);
-                sendMessage(MessageType.FOCUS, e.target.id);
+            if (targetElement.localName === 'input') {
+                const inputElement = targetElement as HTMLInputElement;
+                element.current = inputElement;
+                sendMessage(MessageType.CLICK, targetElement.id);
+                sendMessage(MessageType.FOCUS, targetElement.id);
 
                 //Активируем слушатель клавиш при клике по текстовым полям
-                if (INPUT_TYPES.includes(e.target.attributes.type.value)) {
+                if (INPUT_TYPES.includes(inputElement.type)) {
                     setIsHandlingKeyDown(() => true);
                 }
             }
 
             //Клик по textaria
-            if (e.target.localName === 'textarea') {
-                element.current = e.target;
+            if (targetElement.localName === 'textarea') {
+                element.current = targetElement as HTMLTextAreaElement;
                 setIsHandlingKeyDown(() => true);
-                sendMessage(MessageType.FOCUS, e.target.id);
+                sendMessage(MessageType.FOCUS, targetElement.id);
             }
 
             //Клик по кнопке
-            if (e.target.localName === 'button') {
-                sendMessage(MessageType.CLICK, e.target.id);
+            if (targetElement.localName === 'button') {
+                const btn = targetElement as HTMLButtonElement;
+                sendMessage(MessageType.CLICK, btn.id);
             }
         };
 
@@ -56,10 +62,12 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
 
     //Перехват нажатий клавиш
     useEffect(() => {
-        let timer: NodeJS.Timeout | number;
+        let timer: ReturnType<typeof setTimeout> | number;
 
         /** Перехват нажатий клавиш */
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (!element || !element.current) return;
+
             if (e.key === 'Escape') {
                 sendMessage(MessageType.BLUR, element.current.id);
                 element.current = null;
@@ -68,7 +76,9 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
                 //TODO добавить обработку перемещения при помощи таба
             } else if (!/F(1[0-2]|[1-9])/.test(e.key) && !EXCLUDES_KEYS.includes(e.key)) {
                 timer = setTimeout(() => {
-                    sendMessage(MessageType.INPUT, `${element.current.id}${SEPARATOR}${element.current.value}`);
+                    if (element && element.current) {
+                        sendMessage(MessageType.INPUT, `${element.current.id}${SEPARATOR}${element.current.value}`);
+                    }
                 }, 300);
             }
         };

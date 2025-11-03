@@ -1,12 +1,14 @@
-export enum MessageType {
-    INIT = 'init',
-    LOCATION = 'location',
-    SCROLL = 'scroll',
-    FOCUS = 'focus',
-    INPUT = 'input',
-    BLUR = 'blur',
-    CLICK = 'click',
-};
+export const MessageType = {
+    INIT: 'init',
+    LOCATION: 'location',
+    SCROLL: 'scroll',
+    FOCUS: 'focus',
+    INPUT: 'input',
+    BLUR: 'blur',
+    CLICK: 'click',
+} as const;
+
+export type MessageType = typeof MessageType[keyof typeof MessageType];
 
 export interface WebSocketMessage {
     type: MessageType;

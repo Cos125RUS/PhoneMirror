@@ -5,14 +5,16 @@ import {MessageType} from "../types/websocket.ts";
 import Driver from "./Driver.tsx";
 import Driven from "./Driven.tsx";
 
-const Mirror = () => {
+type DEVICE_TYPES = 'driver' | 'driven';
+
+/**
+ * Отзеркаливание действий десктопа на сопряжённые мобильные устройства
+ * @constructor
+ */
+const PhoneMirror = () => {
     const {sendMessage, isConnected, ws} = useMirror();
-    const DEVICE_TYPES = {
-        driver: () => <Driver sendMessage={sendMessage}/>,
-        driven: () => () => <Driven ws={ws}/>,
-    };
     const {isDesktop} = useDevice();
-    const [deviceType, setDeviceType] = useState<keyof DEVICE_TYPE | null>();
+    const [deviceType, setDeviceType] = useState<DEVICE_TYPES | null>(null);
 
     useEffect(() => {
         if (isConnected) {
@@ -33,4 +35,4 @@ const Mirror = () => {
         : null;
 };
 
-export default Mirror;
+export default PhoneMirror;

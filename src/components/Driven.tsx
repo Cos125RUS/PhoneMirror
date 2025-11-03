@@ -28,7 +28,7 @@ const Driven: React.FC<Props> = ({ws}) => {
                         window.scroll({top: scrollTop, behavior: "smooth"});
                         break;
                     case MessageType.FOCUS:
-                        document.getElementById(message.payload.text).focus();
+                        document.getElementById(message.payload.text)?.focus();
                         break;
                     case MessageType.INPUT:
                         const [id, text] = message.payload.text.split(SEPARATOR);
@@ -48,6 +48,8 @@ const Driven: React.FC<Props> = ({ws}) => {
             }
         };
     }, [ws]);
+
+    return null;
 };
 
 export default Driven;

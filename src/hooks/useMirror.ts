@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import type {SendMessageFunction, WebSocketMessage} from "../types/websocket.ts";
+import type {MessageType, SendMessageFunction, WebSocketMessage} from "../types/websocket.ts";
 
 export const useMirror = () => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
@@ -43,7 +43,7 @@ export const useMirror = () => {
     const sendMessage: SendMessageFunction = useCallback((type: string, message: string) => {
         if (message.trim() && ws.current && isConnected) {
             const wsMessage: WebSocketMessage = {
-                type: type,
+                type: type as MessageType,
                 payload: {
                     text: message.trim()
                 }

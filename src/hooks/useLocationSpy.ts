@@ -1,3 +1,4 @@
+import type {SendMessageFunction} from "../types/websocket.ts";
 import {useEffect} from "react";
 import {useLocation} from "react-router-dom";
 import {MessageType} from "../types/websocket.ts";
