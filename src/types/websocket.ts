@@ -4,6 +4,7 @@ export enum MessageType {
     SCROLL = 'scroll',
     CLICK = 'click',
     INPUT = 'input',
+    BLUR = 'blur',
 };
 
 export interface WebSocketMessage {

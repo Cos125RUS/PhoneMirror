@@ -1,6 +1,8 @@
 import {useEffect} from "react";
 import {MessageType, SEPARATOR, type WebSocketMessage} from "../types/websocket.ts";
 import {useNavigate} from "react-router-dom";
+import {simulateInput} from "../utils/simulateInput.ts";
+import {simulateBlur} from "../utils/simulateBlur.ts";
 
 interface Props {
     ws: React.RefObject<WebSocket | null>;
@@ -29,8 +31,10 @@ const Driven: React.FC<Props> = ({ws}) => {
                         break;
                     case MessageType.INPUT:
                         const [id, text] = message.payload.text.split(SEPARATOR);
-                        console.log(id, text);
-                        //TODO добавить ввод текста
+                        simulateInput(id, text);
+                        break;
+                    case MessageType.BLUR:
+                        simulateBlur(message.payload.text);
                         break;
                     default:
                         console.error('Неизвестная команда: ', message.type);

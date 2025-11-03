@@ -54,6 +54,7 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
         /** Перехват нажатий клавиш */
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
+                sendMessage(MessageType.BLUR, element.current.id);
                 element.current = null;
                 setIsHandlingKeyDown(() => false);
             } else if (e.key === 'Tab') {

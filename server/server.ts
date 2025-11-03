@@ -69,6 +69,10 @@ class WebSocketServerApp {
                     this.broadcast(message, driver);
                     console.log('Введённый текст отправлен');
                     break;
+                case MessageType.BLUR:
+                    this.broadcast(message, driver);
+                    console.log('Событие сброса фокуса отправлено');
+                    break;
                 default:
                     console.log('Неизвестный тип сообщения:', message.type);
             }
