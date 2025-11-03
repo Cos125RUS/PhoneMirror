@@ -17,6 +17,7 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
         /** Перехватчик ввода текста */
         const handleInput = (e: MouseEvent) => {
             if (element.current && element.current !== e.target) {
+                sendMessage(MessageType.BLUR, element.current.id);
                 element.current = null;
                 setIsHandlingKeyDown(() => false);
             }
@@ -25,6 +26,7 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
             if (e.target.localName === 'input') {
                 element.current = e.target;
                 sendMessage(MessageType.CLICK, e.target.id);
+                sendMessage(MessageType.FOCUS, e.target.id);
 
                 //Активируем слушатель клавиш при клике по текстовым полям
                 if (INPUT_TYPES.includes(e.target.attributes.type.value)) {
@@ -36,6 +38,11 @@ export const useInputSpy = (sendMessage: SendMessageFunction) => {
             if (e.target.localName === 'textarea') {
                 element.current = e.target;
                 setIsHandlingKeyDown(() => true);
+                sendMessage(MessageType.FOCUS, e.target.id);
+            }
+
+            //Клик по кнопке
+            if (e.target.localName === 'button') {
                 sendMessage(MessageType.CLICK, e.target.id);
             }
         };

@@ -3,6 +3,7 @@ import {MessageType, SEPARATOR, type WebSocketMessage} from "../types/websocket.
 import {useNavigate} from "react-router-dom";
 import {simulateInput} from "../utils/simulateInput.ts";
 import {simulateBlur} from "../utils/simulateBlur.ts";
+import {simulateClick} from "../utils/simulateClick.ts";
 
 interface Props {
     ws: React.RefObject<WebSocket | null>;
@@ -26,7 +27,7 @@ const Driven: React.FC<Props> = ({ws}) => {
                         const scrollTop = +message.payload.text * (document.documentElement.scrollHeight - window.innerHeight);
                         window.scroll({top: scrollTop, behavior: "smooth"});
                         break;
-                    case MessageType.CLICK:
+                    case MessageType.FOCUS:
                         document.getElementById(message.payload.text).focus();
                         break;
                     case MessageType.INPUT:
@@ -35,6 +36,9 @@ const Driven: React.FC<Props> = ({ws}) => {
                         break;
                     case MessageType.BLUR:
                         simulateBlur(message.payload.text);
+                        break;
+                    case MessageType.CLICK:
+                        simulateClick(message.payload.text);
                         break;
                     default:
                         console.error('Неизвестная команда: ', message.type);

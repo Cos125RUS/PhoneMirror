@@ -61,9 +61,9 @@ class WebSocketServerApp {
                     this.broadcast(message, driver);
                     console.log('Процент прокрутки отправлен');
                     break;
-                case MessageType.CLICK:
+                case MessageType.FOCUS:
                     this.broadcast(message, driver);
-                    console.log('ID кликнутого элемента отправлен');
+                    console.log('ID кликнутого поля ввода отправлен');
                     break;
                 case MessageType.INPUT:
                     this.broadcast(message, driver);
@@ -72,6 +72,10 @@ class WebSocketServerApp {
                 case MessageType.BLUR:
                     this.broadcast(message, driver);
                     console.log('Событие сброса фокуса отправлено');
+                    break;
+                case MessageType.CLICK:
+                    this.broadcast(message, driver);
+                    console.log('ID кликнутого элемента отправлен');
                     break;
                 default:
                     console.log('Неизвестный тип сообщения:', message.type);

@@ -2,9 +2,10 @@ export enum MessageType {
     INIT = 'init',
     LOCATION = 'location',
     SCROLL = 'scroll',
-    CLICK = 'click',
+    FOCUS = 'focus',
     INPUT = 'input',
     BLUR = 'blur',
+    CLICK = 'click',
 };
 
 export interface WebSocketMessage {
