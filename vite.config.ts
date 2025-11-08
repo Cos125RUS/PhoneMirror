@@ -43,11 +43,11 @@ export default defineConfig({
     build: {
         lib: {
             entry: {
-                main: resolve(__dirname, 'src/index.ts'),
+                index: resolve(__dirname, 'src/index.ts'),
                 server: resolve(__dirname, 'server/server.ts'),
             },
             name: 'PhoneMirror',
-            fileName: (format) => `index.${format}.js`,
+            fileName: (format, entryName) => `${entryName}.${format}.js`,
             formats: ['es', 'cjs']
         },
         rollupOptions: {

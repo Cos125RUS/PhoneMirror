@@ -4,7 +4,6 @@ import { readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { MessageType, WebSocketMessage, ClientWebSocket } from '../src/types/websocket';
-import driver from "../src/components/Driver";
 
 class WebSocketServerApp {
     private wss: WebSocketServer;
@@ -53,27 +52,27 @@ class WebSocketServerApp {
                     }
                     break;
                 case MessageType.LOCATION:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('Локация отправлена');
                     break;
                 case MessageType.SCROLL:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('Процент прокрутки отправлен');
                     break;
                 case MessageType.FOCUS:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('ID кликнутого поля ввода отправлен');
                     break;
                 case MessageType.INPUT:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('Введённый текст отправлен');
                     break;
                 case MessageType.BLUR:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('Событие сброса фокуса отправлено');
                     break;
                 case MessageType.CLICK:
-                    this.broadcast(message, driver);
+                    this.broadcast(message, this.driver);
                     console.log('ID кликнутого элемента отправлен');
                     break;
                 default:
@@ -106,9 +105,32 @@ class WebSocketServerApp {
             }
         });
     };
+
+    // Методы для управления сервером
+    public close = (): void => {
+        this.wss.close();
+        this.clients.clear();
+        this.driven.clear();
+        this.driver = null;
+    }
+
+    public getStats = () => {
+        return {
+            totalClients: this.clients.size,
+            drivenDevices: this.driven.size,
+            hasDriver: !!this.driver
+        };
+    }
 }
 
-//Запуск сервера
-const HOST = process.env.HOST || '127.0.0.1';
-const PORT = parseInt(process.env.PORT || '3001');
-new WebSocketServerApp(HOST, PORT);
+// Экспорт для использования в качестве библиотеки
+export function createWebSocketServer(host: string = '127.0.0.1', port: number = 3001): WebSocketServerApp {
+    return new WebSocketServerApp(host, port);
+}
+
+// Запуск сервера напрямую (только если файл запускается напрямую)
+if (require.main === module) {
+    const HOST = process.env.HOST || '127.0.0.1';
+    const PORT = parseInt(process.env.PORT || '3001');
+    new WebSocketServerApp(HOST, PORT);
+}
