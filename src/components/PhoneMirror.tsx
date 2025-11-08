@@ -11,7 +11,7 @@ type DEVICE_TYPES = 'driver' | 'driven';
  * Отзеркаливание действий десктопа на сопряжённые мобильные устройства
  * @constructor
  */
-const PhoneMirror = () => {
+const PhoneMirror: React.FC = () => {
     const {sendMessage, isConnected, ws} = useMirror();
     const {isDesktop} = useDevice();
     const [deviceType, setDeviceType] = useState<DEVICE_TYPES | null>(null);

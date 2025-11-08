@@ -42,7 +42,6 @@ class WebSocketServerApp {
         try {
             const message: WebSocketMessage = JSON.parse(data);
 
-            console.log(message);
             switch (message.type.trim()) {
                 case MessageType.INIT:
                     if (message.payload.text === 'driver') {
@@ -109,7 +108,7 @@ class WebSocketServerApp {
     };
 }
 
-// Запуск сервера
+//Запуск сервера
 const HOST = process.env.HOST || '127.0.0.1';
 const PORT = parseInt(process.env.PORT || '3001');
 new WebSocketServerApp(HOST, PORT);
