@@ -1,5 +1,5 @@
 import { WebSocketServer, WebSocket } from 'ws';
-import { MessageType, type WebSocketMessage } from '../../shared/src/websocket';
+import { MessageType, type WebSocketMessage } from '../../shared/src';
 
 class WebSocketServerApp {
     private wss: WebSocketServer;

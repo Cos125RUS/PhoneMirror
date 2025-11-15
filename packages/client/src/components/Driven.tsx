@@ -1,5 +1,5 @@
 import {useEffect} from "react";
-import {MessageType, SEPARATOR, type WebSocketMessage} from "../../shared/src/websocket.ts";
+import {MessageType, SEPARATOR, type WebSocketMessage} from "../../packages/shared/src/websocket.ts";
 import {useNavigate} from "react-router-dom";
 import {simulateInput} from "../utils/simulateInput.ts";
 import {simulateBlur} from "../utils/simulateBlur.ts";

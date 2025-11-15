@@ -1,7 +1,7 @@
-import type {SendMessageFunction} from "../../shared/src/websocket.ts";
+import type {SendMessageFunction} from "../../packages/shared/src/websocket.ts";
 import {useEffect} from "react";
 import {useLocation} from "react-router-dom";
-import {MessageType} from "../../shared/src/websocket.ts";
+import {MessageType} from "../../packages/shared/src/websocket.ts";
 import {useIsMounted} from "./useIsMounted.ts";
 
 /**

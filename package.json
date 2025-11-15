@@ -2,24 +2,25 @@
   "name": "phone-mirror",
   "license": "MIT",
   "version": "0.1.2",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "./packages/client/dist/index.umd.js",
+  "module": "./packages/client/dist/index.es.js",
+  "types": "./packages/client/dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js",
-      "types": "./dist/types/index.d.ts"
+      "import": "./packages/client/dist/index.es.js",
+      "require": "./packages/client/dist/index.umd.js",
+      "types": "./packages/client/dist/types/index.d.ts"
     },
     "./server": {
-      "import": "./dist/server.es.js",
-      "require": "./dist/server.cjs.js",
-      "types": "./dist/types/src/server.d.ts"
+      "import": "./packages/server/dist/index.es.js",
+      "require": "./packages/server/dist/index.cjs.js",
+      "types": "./packages/server/dist/types/index.d.ts"
     }
   },
   "files": [
-    "dist",
-    "server",
+    "packages/client/dist",
+    "packages/server/dist",
+    "packages/shared/dist",
     "README.md"
   ],
   "keywords": [
@@ -35,8 +36,11 @@
   "scripts": {
     "dev": "vite",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
-    "build": "tsc -b && vite build",
-    "server": "tsx server/src/server.ts",
+    "build": "npm run build:shared && npm run build:client && npm run build:server",
+    "build:client": "vite build --config packages/client/vite.config.ts",
+    "build:server": "vite build --config packages/server/vite.config.ts",
+    "build:shared": "tsc -b packages/shared",
+    "server": "tsx packages/server/src/server.ts",
     "android:connect": "npm run android:open-ports && npm run android:no-dimming && npm run android:open",
     "android:open": "adb shell am start -a android.intent.action.VIEW -d \"http://localhost:5173\"",
     "android:disconnect": "npm run android:close-ports && npm run android:allow-sleep",

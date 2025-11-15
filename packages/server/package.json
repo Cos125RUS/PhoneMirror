@@ -1,0 +1,8 @@
+{
+  "name": "phone-mirror-server",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@phone-mirror/shared": "^0.1.2"
+  }
+}
