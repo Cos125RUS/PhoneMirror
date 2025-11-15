@@ -36,7 +36,7 @@
     "dev": "vite",
     "dev:full": "concurrently \"npm run server\" \"npm run dev\"",
     "build": "tsc -b && vite build",
-    "server": "tsx server/server.ts",
+    "server": "tsx server/src/server.ts",
     "android:connect": "npm run android:open-ports && npm run android:no-dimming && npm run android:open",
     "android:open": "adb shell am start -a android.intent.action.VIEW -d \"http://localhost:5173\"",
     "android:disconnect": "npm run android:close-ports && npm run android:allow-sleep",

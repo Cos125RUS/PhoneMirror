@@ -1,7 +1,7 @@
 import {useMirror} from "../hooks/useMirror.ts";
 import {useEffect, useState} from "react";
 import {useDevice} from "../hooks/useDevice.ts";
-import {MessageType} from "../types/websocket.ts";
+import {MessageType} from "../../shared/src/websocket.ts";
 import Driver from "./Driver.tsx";
 import Driven from "./Driven.tsx";
 

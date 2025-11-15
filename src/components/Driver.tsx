@@ -1,4 +1,4 @@
-import type {SendMessageFunction} from "../types/websocket.ts";
+import type {SendMessageFunction} from "../../shared/src/websocket.ts";
 import {useLocationSpy} from "../hooks/useLocationSpy.ts";
 import {useScrollSpy} from "../hooks/useScrollSpy.ts";
 import {useInputSpy} from "../hooks/useInputSpy.ts";

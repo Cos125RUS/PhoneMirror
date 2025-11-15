@@ -1,4 +1,4 @@
-import {MessageType, type SendMessageFunction} from "../types/websocket.ts";
+import {MessageType, type SendMessageFunction} from "../../shared/src/websocket.ts";
 import {useEffect} from "react";
 
 /**

@@ -1,15 +1,11 @@
 import { WebSocketServer, WebSocket } from 'ws';
-import { createServer } from 'http';
-import { readFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { MessageType, WebSocketMessage, ClientWebSocket } from '../src/types/websocket';
+import { MessageType, type WebSocketMessage } from '../../shared/src/websocket';
 
 class WebSocketServerApp {
     private wss: WebSocketServer;
-    private clients: Set<ClientWebSocket> = new Set();
-    private driven: Set<ClientWebSocket> = new Set();
-    private driver: ClientWebSocket;
+    private clients: Set<WebSocket> = new Set();
+    private driven: Set<WebSocket> = new Set();
+    private driver: WebSocket | null = null;
 
     constructor(host: string, port: number = 3001) {
         this.wss = new WebSocketServer({host, port});
@@ -18,7 +14,7 @@ class WebSocketServerApp {
     }
 
     private setupWebSocket = (): void => {
-        this.wss.on('connection', (ws: ClientWebSocket) => {
+        this.wss.on('connection', (ws: WebSocket) => {
             console.log('Новое подключение');
             this.clients.add(ws);
 
@@ -37,7 +33,7 @@ class WebSocketServerApp {
         });
     };
 
-    private handleMessage = (data: string, ws: ClientWebSocket): void => {
+    private handleMessage = (data: string, ws: WebSocket): void => {
         try {
             const message: WebSocketMessage = JSON.parse(data);
 
@@ -83,18 +79,18 @@ class WebSocketServerApp {
         }
     };
 
-    private handleDisconnect = (ws: ClientWebSocket): void => {
+    private handleDisconnect = (ws: WebSocket): void => {
         console.log('Подключение закрыто');
         this.clients.delete(ws);
     };
 
-    private sendToClient = (ws: ClientWebSocket, message: WebSocketMessage): void => {
-        if (ws.readyState === WebSocket.OPEN) {
-            ws.send(JSON.stringify(message));
-        }
-    };
+    // private sendToClient = (ws: WebSocket, message: WebSocketMessage): void => {
+    //     if (ws.readyState === WebSocket.OPEN) {
+    //         ws.send(JSON.stringify(message));
+    //     }
+    // };
 
-    private broadcast = (message: WebSocketMessage, excludeWs: ClientWebSocket | null = null): void => {
+    private broadcast = (message: WebSocketMessage, excludeWs: WebSocket | null = null): void => {
         const messageStr = JSON.stringify(message);
 
         this.driven.forEach((client, index) => {

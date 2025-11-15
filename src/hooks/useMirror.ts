@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import type {MessageType, SendMessageFunction, WebSocketMessage} from "../types/websocket.ts";
+import type {MessageType, SendMessageFunction, WebSocketMessage} from "../../shared/src/websocket.ts";
 
 export const useMirror = () => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
