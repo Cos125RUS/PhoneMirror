@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {MessageType, type SendMessageFunction, SEPARATOR} from "../../packages/shared/src/websocket.ts";
+import {MessageType, type SendMessageFunction, SEPARATOR} from "@phone-mirror/shared";
 
 const INPUT_TYPES = ['text', 'email', 'phone', 'password'];
 const EXCLUDES_KEYS = ['Enter', 'Shift', 'Control', 'Alt'];

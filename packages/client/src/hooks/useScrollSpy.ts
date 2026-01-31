@@ -1,4 +1,4 @@
-import {MessageType, type SendMessageFunction} from "../../packages/shared/src/websocket.ts";
+import {MessageType, type SendMessageFunction} from "@phone-mirror/shared";
 import {useEffect} from "react";
 
 /**

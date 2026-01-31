@@ -5,7 +5,9 @@ import dts from 'vite-plugin-dts';
 
 export default defineConfig({
     plugins: [
-        react(),
+        react({
+            jsxRuntime: 'automatic' // важно для React 19
+        }),
         dts({
             include: ['src'],
             exclude: [
@@ -14,6 +16,7 @@ export default defineConfig({
                 'src/**/*.stories.tsx',
             ],
             outDir: 'dist/types',
+            tsconfigPath: './tsconfig.json',
         })
 
     ],
@@ -30,7 +33,8 @@ export default defineConfig({
                 globals: {
                     react: 'React',
                     'react-dom': 'ReactDOM',
-                    'react-router-dom': 'ReactRouterDOM'
+                    'react-router-dom': 'ReactRouterDOM',
+                    '@phone-mirror/shared': 'PhoneMirrorShared'
                 }
             }
         },

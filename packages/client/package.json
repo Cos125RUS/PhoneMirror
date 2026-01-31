@@ -1,5 +1,5 @@
 {
-  "name": "phone-mirror-client",
+  "name": "@phone-mirror/client",
   "private": true,
   "type": "module",
   "dependencies": {

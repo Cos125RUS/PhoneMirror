@@ -3,5 +3,16 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@phone-mirror/shared": ["./packages/shared/src"],
+      "@phone-mirror/shared/*": ["./packages/shared/src/*"],
+      "@phone-mirror/client": ["./packages/client/src"],
+      "@phone-mirror/client/*": ["./packages/client/src/*"],
+      "@phone-mirror/server": ["./packages/server/src"],
+      "@phone-mirror/server/*": ["./packages/server/src/*"]
+    }
+  }
 }

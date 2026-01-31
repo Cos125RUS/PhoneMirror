@@ -1,5 +1,5 @@
 {
-  "name": "phone-mirror-server",
+  "name": "@phone-mirror/server",
   "private": true,
   "type": "module",
   "dependencies": {

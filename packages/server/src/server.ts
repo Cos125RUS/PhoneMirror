@@ -1,5 +1,5 @@
-import { WebSocketServer, WebSocket } from 'ws';
-import { MessageType, type WebSocketMessage } from '../../shared/src';
+import {WebSocketServer, WebSocket} from 'ws';
+import {MessageType, type WebSocketMessage} from "@phone-mirror/shared";
 
 class WebSocketServerApp {
     private wss: WebSocketServer;
@@ -125,8 +125,6 @@ export function createWebSocketServer(host: string = '127.0.0.1', port: number =
 }
 
 // Запуск сервера напрямую (только если файл запускается напрямую)
-if (require.main === module) {
-    const HOST = process.env.HOST || '127.0.0.1';
-    const PORT = parseInt(process.env.PORT || '3001');
-    new WebSocketServerApp(HOST, PORT);
-}
+const HOST = process.env.HOST || '127.0.0.1';
+const PORT = parseInt(process.env.PORT || '3001');
+new WebSocketServerApp(HOST, PORT);

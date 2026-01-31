@@ -30,6 +30,13 @@ export default defineConfig({
         })
 
     ],
+    resolve: {
+        alias: {
+            '@phone-mirror/shared': resolve(__dirname, 'packages/shared/src'),
+            '@phone-mirror/client': resolve(__dirname, 'packages/client/src'),
+            '@phone-mirror/server': resolve(__dirname, 'packages/server/src')
+        }
+    },
     server: {
         host: '0.0.0.0', // Разрешаем доступ со всех интерфейсов
         port: 5173, // Порт по умолчанию для Vite
