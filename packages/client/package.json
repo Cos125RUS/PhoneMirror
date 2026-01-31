@@ -2,7 +2,18 @@
   "name": "@phone-mirror/client",
   "private": true,
   "type": "module",
-  "dependencies": {
-    "@phone-mirror/shared": "^0.1.2"
-  }
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ]
 }

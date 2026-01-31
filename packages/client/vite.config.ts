@@ -1,25 +1,18 @@
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import {resolve} from 'path';
-import dts from 'vite-plugin-dts';
+import { resolve } from 'path';
 
 export default defineConfig({
     plugins: [
         react({
-            jsxRuntime: 'automatic' // важно для React 19
-        }),
-        dts({
-            include: ['src'],
-            exclude: [
-                'src/**/*.test.ts',
-                'src/**/*.test.tsx',
-                'src/**/*.stories.tsx',
-            ],
-            outDir: 'dist/types',
-            tsconfigPath: './tsconfig.json',
+            jsxRuntime: 'automatic'
         })
-
     ],
+    resolve: {
+        alias: {
+            '@phone-mirror/shared': resolve(__dirname, '../shared/src')
+        }
+    },
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.ts'),
@@ -38,13 +31,10 @@ export default defineConfig({
                 }
             }
         },
-        // Отключаем копирование public директории
         copyPublicDir: false,
     },
-    // Явно указываем publicDir как false
     publicDir: false,
     define: {
-        // Для корректной работы WebSocket в локальной сети
         global: 'globalThis',
     }
 });
