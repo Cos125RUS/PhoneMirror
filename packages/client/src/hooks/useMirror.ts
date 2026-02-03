@@ -5,7 +5,7 @@ export const useMirror = () => {
     const [isConnected, setIsConnected] = useState<boolean>(false);
     const [isMounted, setIsMounted] = useState(false);
     const ws = useRef<WebSocket | null>(null);
-    const isWebSocketEnable = import.meta.env.VITE_ENABLE_WEBSOCKET === 'true'
+    const isWebSocketEnable = import.meta.env.VITE_ENABLE_WEBSOCKET === 'true';
     const url = import.meta.env.VITE_WS_SERVER_URL;
 
     useEffect(() => {

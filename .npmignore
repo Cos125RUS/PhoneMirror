@@ -26,14 +26,7 @@ dist-ssr
 *.sw?
 /.env
 /.env.development
-/index.html
 /.gitignore
-/dev/
 /public/
-/src/App.css
-/src/App.tsx
-/src/index.css
-/src/main.tsx
-/src/pages/
-
 /packages/test/
+/packages/shared/

@@ -4,12 +4,13 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && tsc --declaration --emitDeclarationOnly"
   },
   "exports": {
     ".": {
-      "types": "./dist/types/index.d.ts",
-      "require": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
     }
   },
   "files": [
