@@ -5,8 +5,12 @@
     "declaration": true,
     "emitDeclarationOnly": true,
     "outDir": "./dist",
-    "declarationMap": false
+    "declarationMap": false,
+    "declarationDir": "./dist/types"
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*",
+    "vite-env.d.ts"
+  ],
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
 }
